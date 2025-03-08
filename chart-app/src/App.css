@@ -1,22 +1,25 @@
 .container {
   background-color: #f0f0f0; /* Light grey background */
   height: 100vh; /* Full viewport height */
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
-  padding: 20px; /* Space around content-box */
-  box-sizing: border-box; /* Ensures padding is included in height */
+  display: flex; /* To position sidebar and content side by side */
 }
 
-.content-box {
+.sidebar-container {
+  background-color: white;
+  width: 250px; /* Fixed width for the sidebar */
+  height: 100vh; /* Full viewport height */
+  padding: 10px; /* Inner padding */
+}
+
+.content {
   background-color: white;
   border-radius: 12px; /* Rounded corners */
-  width: 100%; /* Fill available width inside container */
-  height: 100%; /* Fill available height inside container */
+  margin: 10px; /* Margin around the content box */
   padding: 20px; /* Inner padding */
-  box-sizing: border-box; /* Ensures padding does not add extra height */
+  box-sizing: border-box; /* Ensures padding is included in height and width */
+  flex-grow: 1; /* Content box takes up the remaining space in the container */
   display: flex;
   flex-direction: column; /* Stack items vertically */
-  align-items: center; /* Center vertically */
-  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
 }
