@@ -15,7 +15,6 @@ const SearchBar = () => {
       sx={{
         maxWidth: 400, // Adjust the width of the search bar
         margin: "0 auto", // Center the search bar
-        marginBottom: "10px", // Add a 5px margin at the bottom
         "& .MuiOutlinedInput-root": {
           backgroundColor: "#f0f0f0", // Grey background
           height: "40px", // Set a custom height for the search bar
