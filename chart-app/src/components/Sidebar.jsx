@@ -15,18 +15,17 @@ const Sidebar = () => {
     fetch("./dataseries.json")
       .then((response) => response.json())
       .then((data) => {
-        const chartNames = data.map((chart) => chart.name); // Extract chart names
-        dispatch(setCharts(chartNames)); // Dispatch action to update Redux state
+        dispatch(setCharts(data)); // Pass full data to Redux
       })
       .catch((error) => console.error("Error loading data:", error));
-  }, [dispatch]); // Only run the effect when the component mounts
+  }, [dispatch]);
 
   useEffect(() => {
     console.log("Charts State:", charts); // Add this log to inspect the state
-  }, [charts]); // Only log when charts change
+  }, [charts]);
 
   const handleChartClick = (chartName) => {
-    dispatch(setSelectedChart(chartName));
+    dispatch(setSelectedChart(chartName)); // Select chart & store its data
   };
 
   return (
@@ -42,7 +41,7 @@ const Sidebar = () => {
             style={{
               cursor: "pointer",
               backgroundColor:
-                selectedChart === chart ? "#8FD9FB" : "transparent", // Apply background color for selected chart
+                selectedChart === chart ? "#8FD9FB" : "transparent",
             }}
           >
             <ListItemText primary={chart} />

@@ -1,12 +1,17 @@
 import React, { useState } from "react";
-import { AppBar, Toolbar, IconButton } from "@mui/material";
+import { AppBar, Toolbar, IconButton, Box } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Logo from "./Logo";
 import SearchBar from "./Searchbar";
-import ShowChartIcon from "@mui/icons-material/ShowChart";
+import MenuIcon from "@mui/icons-material/Menu";
 
 const Topbar = () => {
   const [showSearchBar, setShowSearchBar] = useState(false);
+  const [open, setOpen] = useState(false);
+
+  const toggleContent = () => {
+    setOpen(!open);
+  };
 
   const handleSearchClick = () => {
     setShowSearchBar(!showSearchBar);
@@ -14,7 +19,6 @@ const Topbar = () => {
 
   return (
     <div>
-      {/* Topbar with white background and bottom border */}
       <AppBar
         position="static"
         sx={{
@@ -24,27 +28,25 @@ const Topbar = () => {
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          {!showSearchBar ? (
-            <Logo />
-          ) : (
-            <>
-              <IconButton edge="start" sx={{ color: "black" }}>
-                <ShowChartIcon /> {/* Line chart icon */}
-              </IconButton>{" "}
-              <SearchBar />
-            </>
-          )}
+          {!showSearchBar ? <Logo /> : <SearchBar />}
 
-          {/* Right side - Search Icon */}
-          <IconButton
-            edge="end"
-            color="inherit"
-            aria-label="search"
-            sx={{ color: "black" }}
-            onClick={handleSearchClick}
-          >
-            <SearchIcon />
-          </IconButton>
+          {/* Right side - Menu & Search Icons */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <IconButton
+              aria-label="search"
+              sx={{ color: "black" }}
+              onClick={handleSearchClick}
+            >
+              <SearchIcon />
+            </IconButton>
+            <IconButton
+              sx={{ color: "black", mr: 2 }}
+              aria-label="toggle drawer"
+              onClick={toggleContent}
+            >
+              <MenuIcon />
+            </IconButton>
+          </Box>
         </Toolbar>
       </AppBar>
     </div>

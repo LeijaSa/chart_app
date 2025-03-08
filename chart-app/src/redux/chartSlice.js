@@ -1,23 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = {
-  charts: [], // This will store the chart names
-  selectedChart: null, // New state for selected chart
-};
-
 const chartSlice = createSlice({
   name: "charts",
-  initialState,
+  initialState: {
+    charts: [],
+    chartData: {}, // Store full chart data mapped by name
+    selectedChart: null,
+    selectedChartData: null, // Store selected chart data
+  },
   reducers: {
     setCharts: (state, action) => {
-      state.charts = action.payload; // Set the chart names in the state
+      state.charts = action.payload.map((chart) => chart.name); // Store only names
+      state.chartData = action.payload.reduce((acc, chart) => {
+        acc[chart.name] = chart.dataseries; // Store full data by name
+        return acc;
+      }, {});
     },
     setSelectedChart: (state, action) => {
       state.selectedChart = action.payload;
+      state.selectedChartData = state.chartData[action.payload] || null; // Set selected chart data
     },
   },
 });
 
-// Export the action and reducer
 export const { setCharts, setSelectedChart } = chartSlice.actions;
 export default chartSlice.reducer;

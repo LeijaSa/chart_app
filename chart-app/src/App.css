@@ -28,6 +28,11 @@
   justify-content: center; /* Center vertically */
 }
 
+/* Make chart responsive */
+.chart-container {
+  width: 99%; /* Default width for small screens */
+}
+
 /* Media queries */
 @media (min-width: 768px) {
   .container {
@@ -43,5 +48,8 @@
   }
   .topbar {
     display: None;
+  }
+  .chart-container {
+    width: 80%;
   }
 }
