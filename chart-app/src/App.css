@@ -1,0 +1,22 @@
+.container {
+  background-color: #f0f0f0; /* Light grey background */
+  height: 100vh; /* Full viewport height */
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  padding: 20px; /* Space around content-box */
+  box-sizing: border-box; /* Ensures padding is included in height */
+}
+
+.content-box {
+  background-color: white;
+  border-radius: 12px; /* Rounded corners */
+  width: 100%; /* Fill available width inside container */
+  height: 100%; /* Fill available height inside container */
+  padding: 20px; /* Inner padding */
+  box-sizing: border-box; /* Ensures padding does not add extra height */
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+}
