@@ -13,6 +13,9 @@
   display: none; /* Hide the sidebar container */
 }
 
+.sidebar-container .MuiListItem-root {
+  cursor: pointer; /* Change cursor to pointer when hovering over the list items */
+}
 .content {
   border-radius: 12px; /* Rounded corners */
   margin: 0px; /* Margin around the content box */

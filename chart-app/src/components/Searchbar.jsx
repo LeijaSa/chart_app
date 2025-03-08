@@ -1,5 +1,5 @@
 import React from "react";
-import { TextField, InputAdornment } from "@mui/material";
+import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
 const SearchBar = () => {
@@ -13,17 +13,17 @@ const SearchBar = () => {
         },
       }}
       sx={{
-        maxWidth: 400, // Adjust the width of the search bar
-        margin: "0 auto", // Center the search bar
+        maxWidth: 400,
+        margin: "0 auto",
         "& .MuiOutlinedInput-root": {
-          backgroundColor: "#f0f0f0", // Grey background
-          height: "40px", // Set a custom height for the search bar
+          backgroundColor: "#f0f0f0",
+          height: "40px",
         },
         "& .MuiOutlinedInput-input": {
-          color: "black", // Ensure the text color is black
+          color: "black",
         },
         "& .MuiOutlinedInput-notchedOutline": {
-          borderColor: "transparent", // Remove the default border
+          borderColor: "transparent",
         },
       }}
     />
