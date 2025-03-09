@@ -5,7 +5,7 @@ import React, { useState } from "react";
 import ChartList from "./ChartList";
 
 const Sidebar = () => {
-  const [searchTerm, setSearchTerm] = useState(""); // To manage the search term
+  const [searchTerm, setSearchTerm] = useState("");
   return (
     <div className="sidebar-container">
       <Logo />

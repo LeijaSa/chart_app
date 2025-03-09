@@ -8,7 +8,6 @@ const chartSlice = createSlice({
   },
   reducers: {
     setCharts: (state, action) => {
-      // Generate chartId and store everything in the same array
       state.charts = action.payload.map((chart, index) => ({
         chartId: index + 1, // Numeric ID
         name: chart.name, // Name of the chart
@@ -18,8 +17,17 @@ const chartSlice = createSlice({
     setSelectedChart: (state, action) => {
       state.selectedChart = action.payload; // Storing the whole chart object
     },
+    addChart: (state, action) => {
+      const newChart = action.payload;
+      const maxId =
+        state.charts.length > 0
+          ? Math.max(...state.charts.map((chart) => chart.chartId))
+          : 0;
+      newChart.chartId = maxId + 1;
+      state.charts.push(newChart);
+    },
   },
 });
 
-export const { setCharts, setSelectedChart } = chartSlice.actions;
+export const { setCharts, setSelectedChart, addChart } = chartSlice.actions;
 export default chartSlice.reducer;

@@ -19,12 +19,14 @@ const ChartDisplay = () => {
     series: [
       {
         name: selectedChart.name,
-        data: selectedChart.dataseries.map((point) => [
-          new Date(point.date).getTime(),
-          point.value,
-        ]),
+        data: selectedChart.dataseries
+          .map((point) => [new Date(point.date).getTime(), point.value])
+          .sort((a, b) => a[0] - b[0]),
       },
     ],
+    accessibility: {
+      enabled: false, // Disable the accessibility warning
+    },
   };
 
   return <HighchartsReact highcharts={Highcharts} options={options} />;

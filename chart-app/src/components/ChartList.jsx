@@ -17,7 +17,6 @@ const ChartList = ({ searchTerm }) => {
   const charts = useSelector((state) => state.charts.charts);
   const selectedChart = useSelector((state) => state.charts.selectedChart);
 
-  // Track individual menu states
   const [menuAnchor, setMenuAnchor] = useState(null);
   const [selectedMenuChartId, setSelectedMenuChartId] = useState(null);
 
@@ -81,7 +80,6 @@ const ChartList = ({ searchTerm }) => {
             <ListItemText primary={chart.name} />
           </Link>
 
-          {/* Three-dot menu icon */}
           <IconButton
             edge="end"
             aria-label="more"
@@ -92,12 +90,11 @@ const ChartList = ({ searchTerm }) => {
         </ListItem>
       ))}
 
-      {/* Global Menu (Independent from ListItem) */}
       <Menu
         anchorEl={menuAnchor}
         open={Boolean(menuAnchor)}
         onClose={handleMenuClose}
-        sx={{ zIndex: 1300 }} // Ensures menu is above the list
+        sx={{ zIndex: 1300 }}
         anchorOrigin={{
           vertical: "top",
           horizontal: "left",
