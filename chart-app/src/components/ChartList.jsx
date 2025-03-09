@@ -14,43 +14,42 @@ import { Link } from "react-router-dom";
 
 const ChartList = ({ searchTerm }) => {
   const dispatch = useDispatch();
-
-  // Fetch charts from Redux store
   const charts = useSelector((state) => state.charts.charts);
   const selectedChart = useSelector((state) => state.charts.selectedChart);
 
-  const [anchorEl, setAnchorEl] = useState(null); // State to open/close the menu
-  const [selectedChartId, setSelectedChartId] = useState(null); // Track which chart the options are for
+  // Track individual menu states
+  const [menuAnchor, setMenuAnchor] = useState(null);
+  const [selectedMenuChartId, setSelectedMenuChartId] = useState(null);
 
   const handleMenuClick = (event, chartId) => {
-    setAnchorEl(event.currentTarget);
-    //setSelectedChartId(chartId); // Set the selected chart ID for actions
+    event.stopPropagation(); // Prevents ListItem click when clicking on the menu
+    setMenuAnchor(event.currentTarget);
+    setSelectedMenuChartId(chartId);
   };
+
   const handleMenuClose = () => {
-    setAnchorEl(null);
+    setMenuAnchor(null);
+    setSelectedMenuChartId(null);
   };
 
   const handleEdit = () => {
-    console.log("Edit chart with ID:", selectedChartId);
-    // Handle the edit logic here
+    console.log("Edit chart with ID:", selectedMenuChartId);
     handleMenuClose();
   };
 
   const handleDelete = () => {
-    console.log("Delete chart with ID:", selectedChartId);
-    // Handle the delete logic here
+    console.log("Delete chart with ID:", selectedMenuChartId);
     handleMenuClose();
   };
 
-  // If searchTerm is null or empty, show all charts
   const filteredCharts = searchTerm
     ? charts.filter((chart) =>
         chart.name.toLowerCase().includes(searchTerm.toLowerCase())
       )
-    : charts; // Return all charts if no search term
+    : charts;
 
   const handleChartClick = (chart) => {
-    console.log("chart clicked!!");
+    console.log("Chart clicked:", chart);
     dispatch(setSelectedChart(chart));
   };
 
@@ -66,20 +65,23 @@ const ChartList = ({ searchTerm }) => {
               selectedChart?.chartId === chart.chartId
                 ? "#8FD9FB"
                 : "transparent",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
           }}
         >
           <Link
-            to={`/${chart.chartId}`} // Use chartId for navigation
+            to={`/${chart.chartId}`}
             style={{
               textDecoration: "none",
               color: "inherit",
-              width: "100%",
+              flexGrow: 1,
             }}
           >
             <ListItemText primary={chart.name} />
           </Link>
 
-          {/* Three-dot icon to open the menu */}
+          {/* Three-dot menu icon */}
           <IconButton
             edge="end"
             aria-label="more"
@@ -87,25 +89,27 @@ const ChartList = ({ searchTerm }) => {
           >
             <MoreVertIcon />
           </IconButton>
-          {/* Menu for Edit and Delete actions */}
-          <Menu
-            anchorEl={anchorEl}
-            open={Boolean(anchorEl)} // Menu opens only if anchorEl is set
-            onClose={handleMenuClose} // Closes when clicking outside
-            anchorOrigin={{
-              vertical: "top",
-              horizontal: "left",
-            }}
-            transformOrigin={{
-              vertical: "top",
-              horizontal: "right",
-            }}
-          >
-            <MenuItem onClick={handleEdit}>Edit</MenuItem>
-            <MenuItem onClick={handleDelete}>Delete</MenuItem>
-          </Menu>
         </ListItem>
       ))}
+
+      {/* Global Menu (Independent from ListItem) */}
+      <Menu
+        anchorEl={menuAnchor}
+        open={Boolean(menuAnchor)}
+        onClose={handleMenuClose}
+        sx={{ zIndex: 1300 }} // Ensures menu is above the list
+        anchorOrigin={{
+          vertical: "top",
+          horizontal: "left",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
+        <MenuItem onClick={handleEdit}>Edit</MenuItem>
+        <MenuItem onClick={handleDelete}>Delete</MenuItem>
+      </Menu>
     </List>
   );
 };
