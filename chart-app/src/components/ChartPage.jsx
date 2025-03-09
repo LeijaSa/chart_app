@@ -1,6 +1,5 @@
 import React from "react";
 import Topbar from "./Topbar";
-import AddButton from "./AddButton";
 import ChartDisplay from "./ChartDisplay";
 
 const ChartPage = () => {
