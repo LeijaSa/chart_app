@@ -51,6 +51,8 @@ This is a web application built with **React**, **Redux**, and **Material-UI** t
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/LeijaSa/chart-app.git
-cd chart-management-app
+git clone
+cd chart-app
+npm install
+npm run dev
 ```
