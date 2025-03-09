@@ -40,9 +40,7 @@
     height: 100vh; /* Full viewport height */
     padding: 10px; /* Inner padding */
   }
-  .sidebar-container .MuiListItem-root {
-    cursor: pointer; /* Change cursor to pointer when hovering over the list items */
-  }
+
   .content {
     margin: 10px;
     background-color: white;
