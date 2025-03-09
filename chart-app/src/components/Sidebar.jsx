@@ -5,6 +5,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setCharts, setSelectedChart } from "../redux/chartSlice";
 import { List, ListItem, ListItemText } from "@mui/material";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
@@ -15,17 +16,14 @@ const Sidebar = () => {
     fetch("./dataseries.json")
       .then((response) => response.json())
       .then((data) => {
-        dispatch(setCharts(data)); // Pass full data to Redux
+        dispatch(setCharts(data)); // Just dispatch the data, no need to modify chartId here
       })
       .catch((error) => console.error("Error loading data:", error));
   }, [dispatch]);
 
-  useEffect(() => {
-    console.log("Charts State:", charts); // Add this log to inspect the state
-  }, [charts]);
-
-  const handleChartClick = (chartName) => {
-    dispatch(setSelectedChart(chartName)); // Select chart & store its data
+  const handleChartClick = (chart) => {
+    console.log(`Sidebar ${chart}`);
+    dispatch(setSelectedChart(chart));
   };
 
   return (
@@ -36,15 +34,26 @@ const Sidebar = () => {
       <List>
         {charts.map((chart, index) => (
           <ListItem
-            key={index}
+            key={chart.chartId}
             onClick={() => handleChartClick(chart)}
             style={{
               cursor: "pointer",
               backgroundColor:
-                selectedChart === chart ? "#8FD9FB" : "transparent",
+                selectedChart?.chartId === chart.chartId
+                  ? "#8FD9FB"
+                  : "transparent",
             }}
           >
-            <ListItemText primary={chart} />
+            <Link
+              to={`/${chart.chartId}`} // Use chartId for navigation
+              style={{
+                textDecoration: "none",
+                color: "inherit",
+                width: "100%",
+              }}
+            >
+              <ListItemText primary={chart.name} />
+            </Link>
           </ListItem>
         ))}
       </List>

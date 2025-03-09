@@ -18,38 +18,36 @@ const Topbar = () => {
   };
 
   return (
-    <div>
-      <AppBar
-        position="static"
-        sx={{
-          backgroundColor: "white",
-          boxShadow: "none",
-          borderBottom: "1px solid #ddd",
-        }}
-      >
-        <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          {!showSearchBar ? <Logo /> : <SearchBar />}
+    <AppBar
+      position="static"
+      sx={{
+        backgroundColor: "white",
+        boxShadow: "none",
+        borderBottom: "1px solid #ddd",
+      }}
+    >
+      <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
+        {!showSearchBar ? <Logo /> : <SearchBar />}
 
-          {/* Right side - Menu & Search Icons */}
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <IconButton
-              aria-label="search"
-              sx={{ color: "black" }}
-              onClick={handleSearchClick}
-            >
-              <SearchIcon />
-            </IconButton>
-            <IconButton
-              sx={{ color: "black", mr: 2 }}
-              aria-label="toggle drawer"
-              onClick={toggleContent}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
-        </Toolbar>
-      </AppBar>
-    </div>
+        {/* Right side - Menu & Search Icons */}
+        <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+          <IconButton
+            aria-label="search"
+            sx={{ color: "black" }}
+            onClick={handleSearchClick}
+          >
+            <SearchIcon />
+          </IconButton>
+          <IconButton
+            sx={{ color: "black", mr: 2 }}
+            aria-label="toggle drawer"
+            onClick={toggleContent}
+          >
+            <MenuIcon />
+          </IconButton>
+        </Box>
+      </Toolbar>
+    </AppBar>
   );
 };
 

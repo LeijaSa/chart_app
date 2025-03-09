@@ -2,35 +2,30 @@
   background-color: #f0f0f0; /* Light grey background */
   height: 100vh; /* Full viewport height */
   display: flex; /* To position sidebar and content side by side */
-  flex-direction: column; /* Switch to column layout on mobile */
 }
-
-.sidebar-container {
-  background-color: white;
-  width: 250px; /* Fixed width for the sidebar */
+.content-container {
+  flex-grow: 1; /* Make content-container flexible */
+  overflow: hidden; /* Prevents scrolling */
+}
+.content-wrapper {
+  display: flex;
+  align-items: center; /* Center horizontally */
+  justify-content: center; /* Center vertically */
   height: 100vh; /* Full viewport height */
-  padding: 10px; /* Inner padding */
-  display: none; /* Hide the sidebar container */
-}
-
-.sidebar-container .MuiListItem-root {
-  cursor: pointer; /* Change cursor to pointer when hovering over the list items */
 }
 .content {
-  border-radius: 12px; /* Rounded corners */
-  margin: 0px; /* Margin around the content box */
-  padding: 20px; /* Inner padding */
-  box-sizing: border-box; /* Ensures padding is included in height and width */
-  flex-grow: 1; /* Content box takes up the remaining space in the container */
   display: flex;
   flex-direction: column; /* Stack items vertically */
   align-items: center; /* Center horizontally */
   justify-content: center; /* Center vertically */
 }
-
-/* Make chart responsive */
 .chart-container {
-  width: 99%; /* Default width for small screens */
+  margin: 5px;
+  overflow: hidden; /* Prevents scrolling */
+  width: 100%; /* Make sure it takes up full width */
+}
+.sidebar-container {
+  display: none; /* Hide the sidebar container */
 }
 
 /* Media queries */
@@ -38,18 +33,27 @@
   .container {
     flex-direction: row; /* Keep the row layout for desktop */
   }
-
   .sidebar-container {
     display: block; /* Show the sidebar container */
+    background-color: white;
+    width: 250px; /* Fixed width for the sidebar */
+    height: 100vh; /* Full viewport height */
+    padding: 10px; /* Inner padding */
+  }
+  .sidebar-container .MuiListItem-root {
+    cursor: pointer; /* Change cursor to pointer when hovering over the list items */
   }
   .content {
     margin: 10px;
     background-color: white;
+    border-radius: 12px; /* Rounded corners */
+    flex-grow: 1; /* Content box takes up the remaining space in the container */
+    height: 98vh;
+  }
+  .chart-container {
+    width: 80%; /* Take up 80% of the screen on large screens */
   }
   .topbar {
     display: None;
-  }
-  .chart-container {
-    width: 80%;
   }
 }
