@@ -2,11 +2,16 @@ import React from "react";
 import { TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 
-const SearchBar = () => {
+const SearchBar = ({ setSearchTerm }) => {
+  const handleSearchChange = (event) => {
+    setSearchTerm(event.target.value); // Update the search term in the parent component
+  };
+
   return (
     <TextField
       variant="outlined"
       placeholder="Search..."
+      onChange={handleSearchChange} // Handle input change
       slotProps={{
         input: {
           startAdornment: <SearchIcon />,
@@ -14,7 +19,7 @@ const SearchBar = () => {
       }}
       sx={{
         maxWidth: 400,
-        margin: "0 auto",
+        margin: "10px",
         "& .MuiOutlinedInput-root": {
           backgroundColor: "#f0f0f0",
           height: "40px",

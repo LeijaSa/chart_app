@@ -4,23 +4,27 @@ import { setSelectedChart } from "../redux/chartSlice";
 import { List, ListItem, ListItemText } from "@mui/material";
 import { Link } from "react-router-dom";
 
-const ChartList = () => {
+const ChartList = ({ searchTerm }) => {
   const dispatch = useDispatch();
 
   // Fetch charts from Redux store
   const charts = useSelector((state) => state.charts.charts);
   const selectedChart = useSelector((state) => state.charts.selectedChart);
 
-  console.log("Charts data:", charts); // Debug log: Print charts data to see the structure
+  // If searchTerm is null or empty, show all charts
+  const filteredCharts = searchTerm
+    ? charts.filter((chart) =>
+        chart.name.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : charts; // Return all charts if no search term
 
   const handleChartClick = (chart) => {
-    console.log(`Sidebar ${chart}`);
     dispatch(setSelectedChart(chart));
   };
 
   return (
     <List>
-      {charts.map((chart, index) => (
+      {filteredCharts.map((chart) => (
         <ListItem
           key={chart.chartId}
           onClick={() => handleChartClick(chart)}

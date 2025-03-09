@@ -1,16 +1,17 @@
 import AddButton from "./AddButton";
 import Logo from "./Logo";
 import SearchBar from "./Searchbar";
-import React from "react";
+import React, { useState } from "react";
 import ChartList from "./ChartList";
 
 const Sidebar = () => {
+  const [searchTerm, setSearchTerm] = useState(""); // To manage the search term
   return (
     <div className="sidebar-container">
       <Logo />
-      <SearchBar />
+      <SearchBar setSearchTerm={setSearchTerm} />
       <AddButton />
-      <ChartList />
+      <ChartList searchTerm={searchTerm} />
     </div>
   );
 };

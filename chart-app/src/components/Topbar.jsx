@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { AppBar, Toolbar, IconButton, Box, Drawer } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
 import Logo from "./Logo";
 import SearchBar from "./Searchbar";
 import MenuIcon from "@mui/icons-material/Menu";
@@ -8,15 +7,11 @@ import ChartList from "./ChartList";
 import AddButton from "./AddButton";
 
 const Topbar = () => {
-  const [showSearchBar, setShowSearchBar] = useState(false);
   const [open, setOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
 
   const toggleContent = () => {
     setOpen(!open);
-  };
-
-  const handleSearchClick = () => {
-    setShowSearchBar(!showSearchBar);
   };
 
   return (
@@ -30,24 +25,14 @@ const Topbar = () => {
         }}
       >
         <Toolbar sx={{ display: "flex", justifyContent: "space-between" }}>
-          {!showSearchBar ? <Logo /> : <SearchBar />}
-
-          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
-            <IconButton
-              aria-label="search"
-              sx={{ color: "black" }}
-              onClick={handleSearchClick}
-            >
-              <SearchIcon />
-            </IconButton>
-            <IconButton
-              sx={{ color: "black", mr: 2 }}
-              aria-label="toggle drawer"
-              onClick={toggleContent}
-            >
-              <MenuIcon />
-            </IconButton>
-          </Box>
+          <Logo />
+          <IconButton
+            sx={{ color: "black", mr: 2 }}
+            aria-label="toggle drawer"
+            onClick={toggleContent}
+          >
+            <MenuIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Drawer
@@ -63,7 +48,8 @@ const Topbar = () => {
           boxSizing: "border-box",
         }}
       >
-        <ChartList />
+        <SearchBar setSearchTerm={setSearchTerm} />
+        <ChartList searchTerm={searchTerm} />
         <AddButton />
       </Drawer>
     </>
